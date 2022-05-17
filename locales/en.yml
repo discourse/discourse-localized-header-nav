@@ -1,0 +1,5 @@
+en:
+  theme_metadata:
+    description: ""
+  logged_in_message: Set your language in the interface preferences
+  logged_out_message: Login to set language

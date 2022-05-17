@@ -1,0 +1,60 @@
+<ul class="localized-header-nav">
+  {{#each foundLocale.links as |l|}}
+    <li
+      data-divider="{{theme-setting 'nav_divider'}}"
+      class="{{if l.sublinks 'localized-header-nav-parent'}}
+        {{dasherize l.link_text}}"
+    >
+      <a
+        href="{{unless l.sublinks l.link}}"
+        {{action "toggleHelp" (dasherize l.link_text)}}
+      >
+        {{l.link_text}}
+        {{#if l.sublinks}}
+          {{d-icon "chevron-up" class="localized-header-menu-opened"}}
+          {{d-icon "chevron-down" class="localized-header-menu-closed"}}
+        {{/if}}
+      </a>
+      {{#if l.sublinks}}
+        <ul class="hidden">
+          {{#each l.sublinks as |sl|}}
+            <li>
+              <a href=" {{sl.link}}">
+                {{sl.link_text}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    </li>
+  {{/each}}
+
+  <li class="localized-header-nav-parent global-menu"><a
+      {{action "toggleHelp" "global-menu"}}
+    >{{d-icon "globe"}}
+      {{d-icon "chevron-up" class="localized-header-menu-opened"}}
+      {{d-icon "chevron-down" class="localized-header-menu-closed"}}</a>
+    <ul class="hidden">
+      <li>
+        {{#if currentUser}}
+          <a href="{{theme-setting 'logged_in_url'}}">
+            {{d-icon (theme-setting "logged_in_icon")}}
+            {{theme-i18n "logged_in_message"}}
+          </a>
+        {{else}}
+          {{#unless (theme-setting "logged_out_url")}}
+            <a href {{action (route-action "showLogin")}}>
+              {{d-icon (theme-setting "logged_out_icon")}}
+              {{theme-i18n "logged_out_message"}}
+            </a>
+          {{else}}
+            <a href={{theme-setting "logged_out_url"}}>
+              {{d-icon (theme-setting "logged_out_icon")}}
+              {{theme-i18n "logged_out_message"}}
+            </a>
+          {{/unless}}
+        {{/if}}
+      </li>
+    </ul>
+  </li>
+</ul>

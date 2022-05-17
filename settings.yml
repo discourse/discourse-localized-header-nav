@@ -1,0 +1,25 @@
+nav_links:
+  default: ""
+  json_schema: '{"type":"array","format":"list","uniqueItems":true,"items":{"type":"object","properties":{"locale":{"type":"string"},"links":{"type":"array","format":"table","uniqueItems":true,"items":{"type":"object","properties":{"link_text":{"type":"string"},"link":{"type":"string"},"sublinks":{"type":"array","format":"table","uniqueItems":true,"items":{"type":"object","properties":{"link_text":{"type":"string"},"link":{"type":"string"}},"additionalProperties":false}}},"additionalProperties":false}}},"additionalProperties":false}}'
+
+logged_in_url:
+  default: "/my/preferences/interface"
+  type: string
+
+logged_in_icon:
+  default: "cog"
+  type: string
+
+logged_out_url:
+  default: ""
+  description: optional URL - when left blank the text will link to login
+
+logged_out_icon:
+  default: "user"
+  type: string
+
+nav_divider:
+  default: "|"
+
+global_icon:
+  default: "globe"

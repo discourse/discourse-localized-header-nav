@@ -130,6 +130,22 @@
   }
 }
 
+// custom styles
+
+.localized-header-connector {
+  > div {
+    max-width: 1076px;
+  }
+}
+
+.localized-header-nav a {
+  color: gray;
+}
+
+.localized-header-nav > li:not(:last-child)::after {
+  color: gray;
+}
+
 // theme settings
 
 #json-editor-holder {
@@ -158,7 +174,7 @@
   }
 
   thead {
-    background: rgba(0, 0, 0, 0.15);
+    background: var(--secondary);
   }
 
   table {

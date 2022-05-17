@@ -1,5 +1,6 @@
 nav_links:
-  default: ""
+  default: >-
+    [{}]
   json_schema: '{"type":"array","format":"list","uniqueItems":true,"items":{"type":"object","properties":{"locale":{"type":"string"},"links":{"type":"array","format":"table","uniqueItems":true,"items":{"type":"object","properties":{"link_text":{"type":"string"},"link":{"type":"string"},"sublinks":{"type":"array","format":"table","uniqueItems":true,"items":{"type":"object","properties":{"link_text":{"type":"string"},"link":{"type":"string"}},"additionalProperties":false}}},"additionalProperties":false}}},"additionalProperties":false}}'
 
 logged_in_url:

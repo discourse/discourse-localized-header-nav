@@ -14,6 +14,14 @@ export default Component.extend({
     let filteredLocale = this.parsedSetting.filter(
       (obj) => obj.locale === I18n.currentLocale()
     );
+
+    if (!filteredLocale) {
+      // default to languge if no locale set
+      filteredLocale = this.parsedSetting.filter(
+        (obj) => obj.locale === settings.fallback_language
+      );
+    }
+
     return filteredLocale[0];
   },
 

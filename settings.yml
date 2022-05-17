@@ -24,3 +24,6 @@ nav_divider:
 
 global_icon:
   default: "globe"
+
+fallback_language:
+  default: "en"

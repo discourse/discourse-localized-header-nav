@@ -15,7 +15,7 @@ export default Component.extend({
       (obj) => obj.locale === I18n.currentLocale()
     );
 
-    if (!filteredLocale) {
+    if (!filteredLocale.length) {
       // default to languge if no locale set
       filteredLocale = this.parsedSetting.filter(
         (obj) => obj.locale === settings.fallback_language

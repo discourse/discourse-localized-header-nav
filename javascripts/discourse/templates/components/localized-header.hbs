@@ -7,7 +7,7 @@
     >
       <a
         href="{{unless l.sublinks l.link}}"
-        {{action "toggleHelp" (dasherize l.link_text)}}
+        onclick={{if l.sublinks (action "toggleHelp" l)}}
       >
         {{l.link_text}}
         {{#if l.sublinks}}

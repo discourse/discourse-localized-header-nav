@@ -3,6 +3,7 @@ import discourseComputed from "discourse-common/utils/decorators";
 import { bind } from "discourse-common/utils/decorators";
 import EmberObject, { action, computed } from "@ember/object";
 import { schedule } from "@ember/runloop";
+import { dasherize } from "@ember/string";
 
 export default Component.extend({
   parsedSetting: computed(function () {
@@ -56,19 +57,30 @@ export default Component.extend({
   },
 
   @action
-  toggleHelp(className) {
+  toggleHelp(link) {
+    let dashClass;
+
+    if (link != "global-menu") {
+      dashClass = dasherize(link.link_text);
+      if (!link.sublinks.length) {
+        return;
+      }
+    } else {
+      dashClass = "global-menu";
+    }
+
     document
-      .querySelectorAll(`.localized-header-nav-parent:not(.${className})`)
+      .querySelectorAll(`.localized-header-nav-parent:not(.${dashClass})`)
       .forEach((element) => element.classList.remove("localized-nav-open"));
 
     document
-      .querySelectorAll(`.localized-header-nav-parent:not(.${className}) > ul`)
+      .querySelectorAll(`.localized-header-nav-parent:not(.${dashClass}) > ul`)
       .forEach((element) => element.classList.add("hidden"));
 
-    let buildClass = `.localized-header-nav-parent.${className} > ul`;
+    let buildClass = `.localized-header-nav-parent.${dashClass} > ul`;
 
     document
-      .querySelector(`.localized-header-nav-parent.${className}`)
+      .querySelector(`.localized-header-nav-parent.${dashClass}`)
       .classList.toggle("localized-nav-open");
 
     document.querySelector(buildClass).classList.toggle("hidden");

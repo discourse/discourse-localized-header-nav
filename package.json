@@ -1,7 +1,10 @@
 {
+  "name": "discourse-localized-header-nav",
+  "version": "1.0.0",
+  "repository": "https://github.com/discourse/discourse-localized-header-nav",
   "author": "Discourse",
   "license": "MIT",
   "devDependencies": {
-    "eslint-config-discourse": "latest"
+    "eslint-config-discourse": "^3.1.0"
   }
 }

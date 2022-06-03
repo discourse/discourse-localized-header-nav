@@ -13,7 +13,7 @@ export default Component.extend({
   @discourseComputed
   foundLocale() {
     let filteredLocale = this.parsedSetting.filter(
-      (obj) => obj.locale === I18n.currentLocale()
+      (obj) => obj.locale === I18n.currentLocale().replace(/_/g, "-")
     );
 
     if (!filteredLocale.length) {

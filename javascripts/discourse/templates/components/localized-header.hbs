@@ -1,12 +1,12 @@
 <ul class="localized-header-nav">
   {{#each foundLocale.links as |l|}}
     <li
-      data-divider="{{theme-setting 'nav_divider'}}"
-      class="{{if l.sublinks 'localized-header-nav-parent'}}
+      data-divider={{theme-setting "nav_divider"}}
+      class="{{if l.sublinks "localized-header-nav-parent"}}
         {{dasherize l.link_text}}"
     >
       <a
-        href="{{unless l.sublinks l.link}}"
+        href={{unless l.sublinks l.link}}
         onclick={{if l.sublinks (action "toggleHelp" l)}}
       >
         {{l.link_text}}
@@ -15,11 +15,12 @@
           {{d-icon "chevron-down" class="localized-header-menu-closed"}}
         {{/if}}
       </a>
+
       {{#if l.sublinks}}
         <ul class="hidden">
           {{#each l.sublinks as |sl|}}
             <li>
-              <a href=" {{sl.link}}">
+              <a href={{sl.link}}>
                 {{sl.link_text}}
               </a>
             </li>
@@ -29,30 +30,32 @@
     </li>
   {{/each}}
 
-  <li class="localized-header-nav-parent global-menu"><a
-      {{action "toggleHelp" "global-menu"}}
-    >{{d-icon (theme-setting "global_icon")}}
+  <li class="localized-header-nav-parent global-menu">
+    <a href {{action "toggleHelp" "global-menu"}}>
+      {{d-icon (theme-setting "global_icon")}}
       {{d-icon "chevron-up" class="localized-header-menu-opened"}}
-      {{d-icon "chevron-down" class="localized-header-menu-closed"}}</a>
+      {{d-icon "chevron-down" class="localized-header-menu-closed"}}
+    </a>
+
     <ul class="hidden">
       <li>
         {{#if currentUser}}
-          <a href="{{theme-setting 'logged_in_url'}}">
+          <a href={{theme-setting "logged_in_url"}}>
             {{d-icon (theme-setting "logged_in_icon")}}
             {{theme-i18n "logged_in_message"}}
           </a>
         {{else}}
-          {{#unless (theme-setting "logged_out_url")}}
-            <a href {{action (route-action "showLogin")}}>
-              {{d-icon (theme-setting "logged_out_icon")}}
-              {{theme-i18n "logged_out_message"}}
-            </a>
-          {{else}}
+          {{#if (theme-setting "logged_out_url")}}
             <a href={{theme-setting "logged_out_url"}}>
               {{d-icon (theme-setting "logged_out_icon")}}
               {{theme-i18n "logged_out_message"}}
             </a>
-          {{/unless}}
+          {{else}}
+            <a href {{action (route-action "showLogin")}}>
+              {{d-icon (theme-setting "logged_out_icon")}}
+              {{theme-i18n "logged_out_message"}}
+            </a>
+          {{/if}}
         {{/if}}
       </li>
     </ul>

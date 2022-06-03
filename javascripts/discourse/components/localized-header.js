@@ -1,9 +1,9 @@
 import Component from "@ember/component";
-import discourseComputed from "discourse-common/utils/decorators";
-import { bind } from "discourse-common/utils/decorators";
-import EmberObject, { action, computed } from "@ember/object";
+import discourseComputed, { bind } from "discourse-common/utils/decorators";
+import { action, computed } from "@ember/object";
 import { schedule } from "@ember/runloop";
 import { dasherize } from "@ember/string";
+import I18n from "I18n";
 
 export default Component.extend({
   parsedSetting: computed(function () {
@@ -17,7 +17,7 @@ export default Component.extend({
     );
 
     if (!filteredLocale.length) {
-      // default to languge if no locale set
+      // default to language if no locale set
       filteredLocale = this.parsedSetting.filter(
         (obj) => obj.locale === settings.fallback_language
       );
@@ -60,7 +60,7 @@ export default Component.extend({
   toggleHelp(link) {
     let dashClass;
 
-    if (link != "global-menu") {
+    if (link !== "global-menu") {
       dashClass = dasherize(link.link_text);
       if (!link.sublinks.length) {
         return;

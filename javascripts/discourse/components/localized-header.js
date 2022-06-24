@@ -16,17 +16,17 @@ export default Component.extend({
       (obj) => obj.locale === I18n.currentLocale().replace(/_/g, "-")
     );
 
-    // remove special chars, spaces, from link class
-    filteredLocale[0].links.forEach((link) => {
-      link.link_class = dasherize(link.link_text.replace(/[^a-zA-Z]/, ""));
-    });
-
     if (!filteredLocale.length) {
       // default to language if no locale set
       filteredLocale = this.parsedSetting.filter(
         (obj) => obj.locale === settings.fallback_language
       );
     }
+
+    // remove special chars, spaces, from link class
+    filteredLocale[0].links.forEach((link) => {
+      link.link_class = dasherize(link.link_text.replace(/[^a-zA-Z]/, ""));
+    });
 
     return filteredLocale[0];
   },

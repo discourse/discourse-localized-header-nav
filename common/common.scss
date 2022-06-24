@@ -2,12 +2,21 @@
   --localized-header-offset-height: 2em;
 }
 
+.d-header-wrap.custom-menu-open {
+  z-index: 1001;
+}
+
 .localized-header-connector {
   background: var(--header_background);
   position: sticky;
   top: 0;
   z-index: 1001;
   height: var(--localized-header-offset-height);
+  -webkit-transform: translate3d(
+    0,
+    0,
+    0
+  ); // reduces icon jitter on scroll in iOS Safari
 
   padding: 0 20px; // matches core wrap
   display: flex;
@@ -45,12 +54,6 @@
       // submenu positioning
       ul {
         right: 0;
-      }
-    }
-
-    @media screen and (max-width: 600px) {
-      &:not(:last-child) {
-        display: none;
       }
     }
 

@@ -66,8 +66,8 @@ export default Component.extend({
   toggleHelp(link) {
     let linkClass;
 
-    if (link != "global-menu") {
-      linkClass = link.link_class
+    if (link !== "global-menu") {
+      linkClass = link.link_class;
       if (!link.sublinks.length) {
         return;
       }

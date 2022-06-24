@@ -12,7 +12,11 @@
   top: 0;
   z-index: 1001;
   height: var(--localized-header-offset-height);
-  -webkit-transform: translate3d(0,0,0); // reduces icon jitter on scroll in iOS Safari
+  -webkit-transform: translate3d(
+    0,
+    0,
+    0
+  ); // reduces icon jitter on scroll in iOS Safari
 
   padding: 0 20px; // matches core wrap
   display: flex;

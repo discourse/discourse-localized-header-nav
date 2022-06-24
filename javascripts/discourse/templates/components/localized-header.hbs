@@ -1,9 +1,8 @@
 <ul class="localized-header-nav">
   {{#each foundLocale.links as |l|}}
     <li
-      data-divider={{theme-setting "nav_divider"}}
-      class="{{if l.sublinks "localized-header-nav-parent"}}
-        {{dasherize l.link_text}}"
+      data-divider="{{theme-setting 'nav_divider'}}"
+      class="{{if l.sublinks 'localized-header-nav-parent'}} {{l.link_class}}"
     >
       <a
         href={{unless l.sublinks l.link}}

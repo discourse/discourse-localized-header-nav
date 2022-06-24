@@ -16,6 +16,12 @@ export default Component.extend({
       (obj) => obj.locale === I18n.currentLocale().replace(/_/g, "-")
     );
 
+    // remove special chars, spaces, from link class
+    filteredLocale[0].links.forEach((link) => {
+      link.link_class = dasherize(link.link_text.replace(/[^a-zA-Z]/, ''));
+    });
+
+
     if (!filteredLocale.length) {
       // default to language if no locale set
       filteredLocale = this.parsedSetting.filter(
@@ -58,29 +64,29 @@ export default Component.extend({
 
   @action
   toggleHelp(link) {
-    let dashClass;
+    let linkClass;
 
-    if (link !== "global-menu") {
-      dashClass = dasherize(link.link_text);
+    if (link != "global-menu") {
+      linkClass = link.link_class
       if (!link.sublinks.length) {
         return;
       }
     } else {
-      dashClass = "global-menu";
+      linkClass = "global-menu";
     }
 
     document
-      .querySelectorAll(`.localized-header-nav-parent:not(.${dashClass})`)
+      .querySelectorAll(`.localized-header-nav-parent:not(.${linkClass})`)
       .forEach((element) => element.classList.remove("localized-nav-open"));
 
     document
-      .querySelectorAll(`.localized-header-nav-parent:not(.${dashClass}) > ul`)
+      .querySelectorAll(`.localized-header-nav-parent:not(.${linkClass}) > ul`)
       .forEach((element) => element.classList.add("hidden"));
 
-    let buildClass = `.localized-header-nav-parent.${dashClass} > ul`;
+    let buildClass = `.localized-header-nav-parent.${linkClass} > ul`;
 
     document
-      .querySelector(`.localized-header-nav-parent.${dashClass}`)
+      .querySelector(`.localized-header-nav-parent.${linkClass}`)
       .classList.toggle("localized-nav-open");
 
     document.querySelector(buildClass).classList.toggle("hidden");

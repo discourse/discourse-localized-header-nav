@@ -25,7 +25,7 @@ export default Component.extend({
 
     // remove special chars, spaces, from link class
     filteredLocale[0].links.forEach((link) => {
-      link.link_class = dasherize(link.link_text.replace(/[^a-zA-Z]/, ""));
+      link.link_class = dasherize(link.link_text.replace(/[^a-zA-Z]/g, ""));
     });
 
     return filteredLocale[0];

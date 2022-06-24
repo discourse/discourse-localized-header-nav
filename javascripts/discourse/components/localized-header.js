@@ -23,9 +23,9 @@ export default Component.extend({
       );
     }
 
-    // remove special chars, spaces, from link class
-    filteredLocale[0].links.forEach((link) => {
-      link.link_class = dasherize(link.link_text.replace(/[^a-zA-Z]/g, ""));
+    // index-based parent link class
+    filteredLocale[0].links.forEach((link, index) => {
+      link.link_class = `localized-header-link-${index}`;
     });
 
     return filteredLocale[0];

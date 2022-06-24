@@ -2,7 +2,6 @@ import Component from "@ember/component";
 import discourseComputed, { bind } from "discourse-common/utils/decorators";
 import { action, computed } from "@ember/object";
 import { schedule } from "@ember/runloop";
-import { dasherize } from "@ember/string";
 import I18n from "I18n";
 
 export default Component.extend({
@@ -23,9 +22,9 @@ export default Component.extend({
       );
     }
 
-    // remove special chars, spaces, from link class
-    filteredLocale[0].links.forEach((link) => {
-      link.link_class = dasherize(link.link_text.replace(/[^a-zA-Z]/g, ""));
+    // index-based parent link class
+    filteredLocale[0].links.forEach((link, index) => {
+      link.link_class = `localized-header-link-${index}`;
     });
 
     return filteredLocale[0];

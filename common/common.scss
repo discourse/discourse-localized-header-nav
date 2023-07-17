@@ -1,5 +1,5 @@
 .d-header-wrap {
-  top: 2.86em; // height of localized header
+  top: 1.87em; // height of localized header
   &.custom-menu-open {
     z-index: 1001;
   }
@@ -30,6 +30,7 @@
   display: flex;
   list-style-type: none;
   margin-left: auto;
+  margin: 0.5em 0 0.5em auto;
 
   a {
     color: var(--header_primary);

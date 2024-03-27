@@ -1,7 +1,7 @@
 import Component from "@ember/component";
-import discourseComputed, { bind } from "discourse-common/utils/decorators";
 import { action, computed } from "@ember/object";
 import { schedule } from "@ember/runloop";
+import discourseComputed, { bind } from "discourse-common/utils/decorators";
 import I18n from "I18n";
 
 export default Component.extend({
@@ -41,6 +41,7 @@ export default Component.extend({
   },
 
   didInsertElement() {
+    this._super(...arguments);
     this.appEvents.on("page:changed", this, "_cleanUp");
     schedule("afterRender", () => {
       document.addEventListener("click", this.outsideClick);
@@ -48,6 +49,7 @@ export default Component.extend({
   },
 
   willDestroyElement() {
+    this._super(...arguments);
     this.appEvents.off("page:changed", this, "_cleanUp");
     document.removeEventListener("click", this.outsideClick);
   },

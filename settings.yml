@@ -1,7 +1,7 @@
 nav_links:
   default: >-
     [{}]
-  json_schema: '{"type":"array","format":"list","uniqueItems":true,"items":{"type":"object","properties":{"locale":{"type":"string", "description": "standard language codes, for example en, fr, zh-TW, etc"},"links":{"type":"array","format":"table","uniqueItems":true,"items":{"type":"object","properties":{"link_text":{"type":"string"},"link":{"type":"string"},"sublinks":{"type":"array","format":"table","uniqueItems":true,"items":{"type":"object","properties":{"link_text":{"type":"string"},"link":{"type":"string"}},"additionalProperties":false}}},"additionalProperties":false}}},"additionalProperties":false}}'
+  json_schema: '{"type":"array","format":"list","uniqueItems":true,"items":{"type":"object","properties":{"locale":{"type":"string","format":"textarea", "description": "standard language codes, for example en, fr, zh-TW, etc"},"links":{"type":"array","format":"table","uniqueItems":true,"items":{"type":"object","properties":{"link_text":{"type":"string"},"link":{"type":"string"},"sublinks":{"type":"array","format":"table","uniqueItems":true,"items":{"type":"object","properties":{"link_text":{"type":"string"},"link":{"type":"string"}},"additionalProperties":false}}},"additionalProperties":false}}},"additionalProperties":false}}'
 
 logged_in_url:
   default: "/my/preferences/interface"

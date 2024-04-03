@@ -1,15 +1,21 @@
+.localized-header-connector {
+  // when no submenu is active, the menu z-index needs to be lower than the site header
+  // so the menu doesn't appear above the full-height mobile slide-in menus
+  z-index: z("header") - 1;
+  &.submenu-active {
+    // when a submenu is active, we need to raise the z-index to ensure it's above the default header
+    z-index: z("header") + 1;
+  }
+}
+
 .d-header-wrap {
   top: 1.87em; // height of localized header
-  &.custom-menu-open {
-    z-index: 1001;
-  }
 }
 
 .localized-header-connector {
   background: var(--header_background);
   position: sticky;
   top: 0;
-  z-index: 1001;
   -webkit-transform: translate3d(
     0,
     0,

@@ -23,7 +23,7 @@ export default Component.extend({
     }
 
     // index-based parent link class
-    filteredLocale[0].links.forEach((link, index) => {
+    filteredLocale[0]?.links.forEach((link, index) => {
       link.link_class = `localized-header-link-${index}`;
     });
 
@@ -38,6 +38,10 @@ export default Component.extend({
     document
       .querySelectorAll(`.localized-header-nav-parent`)
       .forEach((element) => element.classList.remove("localized-nav-open"));
+
+    document
+      .querySelector(".localized-header-connector")
+      .classList.remove("submenu-active");
   },
 
   didInsertElement() {
@@ -88,6 +92,10 @@ export default Component.extend({
     document
       .querySelector(`.localized-header-nav-parent.${linkClass}`)
       .classList.toggle("localized-nav-open");
+
+    document
+      .querySelector(".localized-header-connector")
+      .classList.add("submenu-active");
 
     document.querySelector(buildClass).classList.toggle("hidden");
   },

@@ -1,5 +1,5 @@
 <ul class="localized-header-nav">
-  {{#each foundLocale.links as |l|}}
+  {{#each this.foundLocale.links as |l|}}
     <li
       data-divider={{theme-setting "nav_divider"}}
       class="{{if l.sublinks 'localized-header-nav-parent'}} {{l.link_class}}"
@@ -38,7 +38,7 @@
 
     <ul class="hidden">
       <li>
-        {{#if currentUser}}
+        {{#if this.currentUser}}
           <a href={{theme-setting "logged_in_url"}}>
             {{d-icon (theme-setting "logged_in_icon")}}
             {{theme-i18n "logged_in_message"}}

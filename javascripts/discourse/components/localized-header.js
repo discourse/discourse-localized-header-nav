@@ -4,10 +4,11 @@ import { schedule } from "@ember/runloop";
 import discourseComputed, { bind } from "discourse-common/utils/decorators";
 import I18n from "I18n";
 
-export default Component.extend({
-  parsedSetting: computed(function () {
+export default class LocalizedHeader extends Component {
+  @computed
+  get parsedSetting() {
     return JSON.parse(settings.nav_links);
-  }),
+  }
 
   @discourseComputed
   foundLocale() {
@@ -28,7 +29,7 @@ export default Component.extend({
     });
 
     return filteredLocale[0];
-  },
+  }
 
   _cleanUp() {
     document
@@ -42,21 +43,21 @@ export default Component.extend({
     document
       .querySelector(".localized-header-connector")
       .classList.remove("submenu-active");
-  },
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this.appEvents.on("page:changed", this, "_cleanUp");
     schedule("afterRender", () => {
       document.addEventListener("click", this.outsideClick);
     });
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     this.appEvents.off("page:changed", this, "_cleanUp");
     document.removeEventListener("click", this.outsideClick);
-  },
+  }
 
   @bind
   outsideClick(e) {
@@ -64,7 +65,7 @@ export default Component.extend({
     if (menus && !menus.contains(e.target)) {
       this._cleanUp();
     }
-  },
+  }
 
   @action
   toggleHelp(link) {
@@ -98,5 +99,5 @@ export default Component.extend({
       .classList.add("submenu-active");
 
     document.querySelector(buildClass).classList.toggle("hidden");
-  },
-});
+  }
+}

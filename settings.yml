@@ -8,7 +8,7 @@ logged_in_url:
   type: string
 
 logged_in_icon:
-  default: "cog"
+  default: "gear"
   type: string
 
 logged_out_url:

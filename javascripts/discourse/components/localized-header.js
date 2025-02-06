@@ -1,8 +1,8 @@
 import Component from "@ember/component";
 import { action, computed } from "@ember/object";
 import { schedule } from "@ember/runloop";
-import discourseComputed, { bind } from "discourse-common/utils/decorators";
-import I18n from "I18n";
+import discourseComputed, { bind } from "discourse/lib/decorators";
+import I18n from "discourse-i18n";
 
 export default class LocalizedHeader extends Component {
   @computed

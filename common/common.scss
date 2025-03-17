@@ -2,9 +2,27 @@
   // when no submenu is active, the menu z-index needs to be lower than the site header
   // so the menu doesn't appear above the full-height mobile slide-in menus
   z-index: z("header") - 1;
+  background: var(--header_background);
+  position: sticky;
+  top: 0;
+  transform: translate3d(
+    0,
+    0,
+    0
+  ); // reduces icon jitter on scroll in iOS Safari
+  padding: 0 20px; // matches core wrap
+  display: flex;
+
   &.submenu-active {
     // when a submenu is active, we need to raise the z-index to ensure it's above the default header
     z-index: z("header") + 1;
+  }
+
+  > div {
+    display: flex;
+    width: 100%;
+    max-width: 1076px;
+    margin: 0 auto;
   }
 }
 
@@ -12,34 +30,13 @@
   top: 1.87em; // height of localized header
 }
 
-.localized-header-connector {
-  background: var(--header_background);
-  position: sticky;
-  top: 0;
-  -webkit-transform: translate3d(
-    0,
-    0,
-    0
-  ); // reduces icon jitter on scroll in iOS Safari
-
-  padding: 0 20px; // matches core wrap
-  display: flex;
-  > div {
-    display: flex;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-}
-
 .localized-header-nav {
   display: flex;
   list-style-type: none;
-  margin-left: auto;
   margin: 0.5em 0 0.5em auto;
 
   a {
-    color: var(--header_primary);
+    color: gray;
   }
 
   > li {
@@ -59,20 +56,23 @@
     }
 
     &:not(:last-child) {
-      &:after {
+      &::after {
         content: attr(data-divider);
         font-size: var(--font-down-1);
         padding: 0 1em;
+        color: gray;
       }
     }
 
     a {
       display: flex;
       align-items: center;
+
       &:hover,
       &:focus {
         text-decoration: underline;
       }
+
       .d-icon {
         margin-left: 0.33em;
         font-size: var(--font-down-1);
@@ -83,14 +83,17 @@
 
 .localized-header-nav-parent {
   position: relative;
+
   // chevron icon states
   .localized-header-menu-opened {
     display: none;
   }
+
   &.localized-nav-open {
     .localized-header-menu-opened {
       display: inline-flex;
     }
+
     .localized-header-menu-closed {
       display: none;
     }
@@ -102,7 +105,7 @@
     right: 1em;
     background: var(--header_background);
     padding: 0.75em;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 4px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 3px 4px;
     position: absolute;
     width: 13em;
     z-index: 9999; // above default header
@@ -113,6 +116,7 @@
       display: block;
       font-weight: normal;
       line-height: 1;
+
       &:not(:last-child) {
         margin-bottom: 0.75em;
       }
@@ -125,6 +129,7 @@
     li {
       display: flex;
       line-height: 1.3;
+
       .d-icon {
         align-self: start;
         margin-top: 0.25em;
@@ -134,24 +139,7 @@
   }
 }
 
-// custom styles
-
-.localized-header-connector {
-  > div {
-    max-width: 1076px;
-  }
-}
-
-.localized-header-nav a {
-  color: gray;
-}
-
-.localized-header-nav > li:not(:last-child)::after {
-  color: gray;
-}
-
 // theme settings
-
 #json-editor-holder {
   .je-object__container {
     border-bottom: 1px solid var(--primary-low-mid);
@@ -165,6 +153,11 @@
 
   table {
     table-layout: fixed;
+    background: rgba(0, 0, 0, 0.15);
+
+    td {
+      padding: 0.5em 0.5em;
+    }
   }
 
   .json-editor-btn-movedown,
@@ -179,13 +172,6 @@
 
   thead {
     background: var(--secondary);
-  }
-
-  table {
-    background: rgba(0, 0, 0, 0.15);
-    td {
-      padding: 0.5em 0.5em;
-    }
   }
 }
 

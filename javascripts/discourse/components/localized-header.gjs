@@ -1,8 +1,12 @@
 import Component from "@ember/component";
+import { fn } from "@ember/helper";
+import { on } from "@ember/modifier";
 import { action, computed } from "@ember/object";
 import { schedule } from "@ember/runloop";
+import icon from "discourse/helpers/d-icon";
+import routeAction from "discourse/helpers/route-action";
 import discourseComputed, { bind } from "discourse/lib/decorators";
-import I18n from "discourse-i18n";
+import I18n, { i18n } from "discourse-i18n";
 
 export default class LocalizedHeader extends Component {
   @computed
@@ -68,7 +72,9 @@ export default class LocalizedHeader extends Component {
   }
 
   @action
-  toggleHelp(link) {
+  toggleHelp(link, event) {
+    event.preventDefault();
+
     let linkClass;
 
     if (link !== "global-menu") {
@@ -100,4 +106,76 @@ export default class LocalizedHeader extends Component {
 
     document.querySelector(buildClass).classList.toggle("hidden");
   }
+
+  @action
+  showLogin(event) {
+    event.preventDefault();
+    routeAction("showLogin");
+  }
+
+  <template>
+    <ul class="localized-header-nav">
+      {{#each this.foundLocale.links as |l|}}
+        <li
+          data-divider={{settings.nav_divider}}
+          class="{{if l.sublinks 'localized-header-nav-parent'}}
+            {{l.link_class}}"
+        >
+          <a
+            {{(if l.sublinks (modifier on "click" (fn this.toggleHelp l)))}}
+            href={{unless l.sublinks l.link}}
+          >
+            {{l.link_text}}
+            {{#if l.sublinks}}
+              {{icon "chevron-up" class="localized-header-menu-opened"}}
+              {{icon "chevron-down" class="localized-header-menu-closed"}}
+            {{/if}}
+          </a>
+
+          {{#if l.sublinks}}
+            <ul class="hidden">
+              {{#each l.sublinks as |sl|}}
+                <li>
+                  <a href={{sl.link}}>
+                    {{sl.link_text}}
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </li>
+      {{/each}}
+
+      <li class="localized-header-nav-parent global-menu">
+        <a href {{on "click" (fn this.toggleHelp "global-menu")}}>
+          {{icon settings.global_icon}}
+          {{icon "chevron-up" class="localized-header-menu-opened"}}
+          {{icon "chevron-down" class="localized-header-menu-closed"}}
+        </a>
+
+        <ul class="hidden">
+          <li>
+            {{#if this.currentUser}}
+              <a href={{settings.logged_in_url}}>
+                {{icon settings.logged_in_icon}}
+                {{i18n (themePrefix "logged_in_message")}}
+              </a>
+            {{else}}
+              {{#if settings.logged_out_url}}
+                <a href={{settings.logged_out_url}}>
+                  {{icon settings.logged_out_icon}}
+                  {{i18n (themePrefix "logged_out_message")}}
+                </a>
+              {{else}}
+                <a href {{on "click" this.showLogin}}>
+                  {{icon settings.logged_out_icon}}
+                  {{i18n (themePrefix "logged_out_message")}}
+                </a>
+              {{/if}}
+            {{/if}}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </template>
 }

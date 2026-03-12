@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-classic-components, ember/require-tagless-components */
 import Component from "@ember/component";
 import { fn } from "@ember/helper";
 import { on } from "@ember/modifier";
@@ -5,7 +6,7 @@ import { action, computed } from "@ember/object";
 import { schedule } from "@ember/runloop";
 import icon from "discourse/helpers/d-icon";
 import routeAction from "discourse/helpers/route-action";
-import discourseComputed, { bind } from "discourse/lib/decorators";
+import { bind } from "discourse/lib/decorators";
 import I18n, { i18n } from "discourse-i18n";
 
 export default class LocalizedHeader extends Component {
@@ -14,8 +15,8 @@ export default class LocalizedHeader extends Component {
     return JSON.parse(settings.nav_links);
   }
 
-  @discourseComputed
-  foundLocale() {
+  @computed
+  get foundLocale() {
     let filteredLocale = this.parsedSetting.filter(
       (obj) => obj.locale === I18n.currentLocale().replace(/_/g, "-")
     );
